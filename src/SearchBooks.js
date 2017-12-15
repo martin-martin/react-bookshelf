@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import throttle from 'lodash.throttle'
 
 class SearchBooks extends Component {
 
   state = {
+    query: "",
     books : [
       {
         "title": "The Linux Command Line",
@@ -56,12 +58,35 @@ class SearchBooks extends Component {
     ]
   }
 
+  componentDidMount() {
+    // sets the focus on the search field
+    this.input.focus()
+
+    // limits the API calls to 1 every 1000ms, removes leading whitespace chars
+    this.runSearch = throttle(this.runSearch, 1000, {
+      leading: false,
+      trailing: true
+    })
+
+    // sets the query param and runs the Search function if there is a query
+    const { query } = this.state
+    if (query) {
+      this.runSearch(query)
+    }
+  }
+
+  runSearch = (query) => {
+    console.log("yippie yippieh yeah!")
+    console.log(query)
+  }
+
   render() {
     return(
       <div className="search-books">
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
+
             {/*
               NOTES: The search from BooksAPI is limited to a particular set of search terms.
               You can find these search terms here:
