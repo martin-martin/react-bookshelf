@@ -7,14 +7,40 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    books: []
+    books: [],
+    shelves: {
+      currentlyReading: [],
+      wantToRead: [],
+      read: [],
+    },
+    loading: true,
+  }
+
+  fetchBooks() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({
+        loading: false,
+        books: books,
+        shelves: {
+          currentlyReading: this.assignBooksToShelf(books, 'currentlyReading'),
+          wantToRead: this.assignBooksToShelf(books, 'wantToRead'),
+          read: this.assignBooksToShelf(books, 'read')
+        }
+      })
+      // checkup if all arrives well.
+      console.log(this.state.shelves.read)
+      console.log(this.state.shelves.wantToRead)
+      console.log(this.state.books)
+    })
+  }
+
+  assignBooksToShelf(books, shelf) {
+  // This function lets us track which books belong in which shelves.
+    return books.filter(book => book.shelf === shelf).map(book => book.id)
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books : books })
-      //console.log(this.state.books)
-    })
+    this.fetchBooks()
   }
 
   render() {
