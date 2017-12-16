@@ -73,13 +73,13 @@ class Bookshelf extends Component {
         </div>
         <div className="list-books-content">
           <div>
-          { this.state.shelves.map((shelf) => (
-            <div className="bookshelf">
+          { this.state.shelves.map((shelf, i) => (
+            <div className="bookshelf" key={i}>
               <h2 className="bookshelf-title">{shelf.title}</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  { shelf.books.map((book) => (
-                    <li>
+                  { shelf.books.map((book, j) => (
+                    <li key={j}>
                       <div className="book">
                         <div className="book-top">
                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
@@ -94,8 +94,8 @@ class Bookshelf extends Component {
                           </div>
                         </div>
                         <div className="book-title">{book.title}</div>
-                        {book.authors.map((author) => (
-                          <div className="book-authors">{author}</div>
+                        {book.authors.map((author, k) => (
+                          <div className="book-authors" key={k}>{author}</div>
                         ))}
                       </div>
                     </li>
