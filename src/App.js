@@ -5,6 +5,9 @@ import Bookshelf from './Bookshelf'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
+// JSON.stringify(object)
+// to display a JS object on the website for debugging!!
+
 class BooksApp extends React.Component {
   state = {
     books: [],
@@ -28,9 +31,9 @@ class BooksApp extends React.Component {
         }
       })
       // checkup if all arrives well.
-      // console.log(this.state.shelves.read)
-      // console.log(this.state.shelves.wantToRead)
-      // console.log(this.state.books)
+      console.log(this.state.shelves.read)
+      console.log(this.state.shelves.wantToRead)
+      console.log(this.state.books)
     })
   }
 

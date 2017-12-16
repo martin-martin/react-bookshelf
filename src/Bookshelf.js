@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+// import Book from './Book'
 
 class Bookshelf extends Component {
 
@@ -19,9 +20,11 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">Currently Reading</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                { this.props.shelves.currentlyReading.map((book, j) => (
+                { this.props.shelves.currentlyReading.map((bookId, j) => (
                   <li key={j}>
-                    {book}
+                    {bookId}
+                    {JSON.stringify(this.props.books.filter(book => book.id === bookId))}
+
                   </li>
                 ))}
               </ol>
@@ -31,9 +34,10 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                { this.props.shelves.wantToRead.map((book, j) => (
+                { this.props.shelves.wantToRead.map((bookId, j) => (
                   <li key={j}>
-                    {book}
+                    {bookId}
+                    {JSON.stringify(this.props.books.filter(book => book.id === bookId))}
                   </li>
                 ))}
               </ol>
@@ -43,9 +47,10 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                { this.props.shelves.read.map((book, j) => (
+                { this.props.shelves.read.map((bookId, j) => (
                   <li key={j}>
-                    {book}
+                    {bookId}
+                    {JSON.stringify(this.props.books.filter(book => book.id === bookId))}
                   </li>
                 ))}
               </ol>
