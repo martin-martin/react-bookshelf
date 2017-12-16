@@ -70,6 +70,11 @@ class Bookshelf extends Component {
       <div className="list-books">
         <div className="list-books-title">
           <h1>Bookshelf</h1>
+          <div>
+          { this.props.books.map((book, x) => (
+            <div key={x}>{book.title}</div>
+          ))}
+          </div>
         </div>
         <div className="list-books-content">
           <div>
