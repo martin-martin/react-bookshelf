@@ -1,61 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Book from './Book'
 import throttle from 'lodash.throttle'
+
 
 class SearchBooks extends Component {
 
   state = {
     query: "",
-    books : [
-      {
-        "title": "The Linux Command Line",
-        "subtitle": "A Complete Introduction",
-        "authors": [
-          "William E. Shotts, Jr."
-        ],
-        "publisher": "No Starch Press",
-        "publishedDate": "2012",
-        "description": "You've experienced the shiny",
-        "industryIdentifiers": [
-          {
-            "type": "ISBN_13",
-            "identifier": "9781593273897"
-          },
-          {
-            "type": "ISBN_10",
-            "identifier": "1593273894"
-          }
-        ],
-        "readingModes": {
-          "text": true,
-          "image": false
-        },
-        "pageCount": 480,
-        "printType": "BOOK",
-        "categories": [
-          "COMPUTERS"
-        ],
-        "averageRating": 4,
-        "ratingsCount": 2,
-        "maturityRating": "NOT_MATURE",
-        "allowAnonLogging": true,
-        "contentVersion": "1.2.2.0.preview.2",
-        "panelizationSummary": {
-          "containsEpubBubbles": false,
-          "containsImageBubbles": false
-        },
-        "imageLinks": {
-          "smallThumbnail": "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-          "thumbnail": "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-        },
-        "language": "en",
-        "previewLink": "http://books.google.com/books?id=nggnmAEACAAJ&dq=linux&hl=&cd=3&source=gbs_api",
-        "infoLink": "https://play.google.com/store/books/details?id=nggnmAEACAAJ&source=gbs_api",
-        "canonicalVolumeLink": "https://market.android.com/details?id=book-nggnmAEACAAJ",
-        "id": "nggnmAEACAAJ",
-        "shelf": "currentlyReading"
-      }
-    ]
+    books : this.props.books
   }
 
   componentDidMount() {
@@ -103,24 +56,7 @@ class SearchBooks extends Component {
           <ol className="books-grid">
             {this.state.books.map((book, i) => (
               <li key={i}>
-                <div className="book">
-                  <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-                    <div className="book-shelf-changer">
-                      <select>
-                        <option value="none" disabled>Move to...</option>
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
-                        <option value="none">Goodwill</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="book-title">{book.title}</div>
-                  {book.authors.map((author, j) => (
-                    <div className="book-authors" key={j}>{author}</div>
-                  ))}
-                </div>
+                <Book book={book}/>
               </li>
             ))}
           </ol>
