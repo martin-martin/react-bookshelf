@@ -31,9 +31,9 @@ class BooksApp extends React.Component {
         }
       })
       // checkup if all arrives well.
-      console.log(this.state.shelves.read)
-      console.log(this.state.shelves.wantToRead)
-      console.log(this.state.books)
+      // console.log(this.state.shelves.read)
+      // console.log(this.state.shelves.wantToRead)
+      // console.log(this.state.books)
     })
   }
 

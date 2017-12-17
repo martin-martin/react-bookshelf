@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-// import Book from './Book'
+import Book from './Book'
+
 
 class Bookshelf extends Component {
 
@@ -9,23 +10,17 @@ class Bookshelf extends Component {
       <div className="list-books">
         <div className="list-books-title">
           <h1>Bookshelf</h1>
-          <div>
-          { this.props.books.map((book, x) => (
-            <div key={x}>{book.title}</div>
-          ))}
-          </div>
         </div>
         <div className="list-books-content">
           <div className="bookshelf">
             <h2 className="bookshelf-title">Currently Reading</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                { this.props.shelves.currentlyReading.map((bookId, j) => (
-                  <li key={j}>
-                    {bookId}
-                    {JSON.stringify(this.props.books.filter(book => book.id === bookId))}
-
-                  </li>
+                { this.props.shelves.currentlyReading.map((bookId) => (
+                    <li>
+                      <Book book={this.props.books.filter(book => book.id === bookId)[0]}
+                            key={bookId} />
+                    </li>
                 ))}
               </ol>
             </div>
@@ -34,11 +29,11 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                { this.props.shelves.wantToRead.map((bookId, j) => (
-                  <li key={j}>
-                    {bookId}
-                    {JSON.stringify(this.props.books.filter(book => book.id === bookId))}
-                  </li>
+                { this.props.shelves.wantToRead.map((bookId) => (
+                    <li>
+                      <Book book={this.props.books.filter(book => book.id === bookId)[0]}
+                            key={bookId} />
+                    </li>
                 ))}
               </ol>
             </div>
@@ -47,11 +42,11 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                { this.props.shelves.read.map((bookId, j) => (
-                  <li key={j}>
-                    {bookId}
-                    {JSON.stringify(this.props.books.filter(book => book.id === bookId))}
-                  </li>
+                { this.props.shelves.read.map((bookId) => (
+                    <li>
+                      <Book book={this.props.books.filter(book => book.id === bookId)[0]}
+                            key={bookId} />
+                    </li>
                 ))}
               </ol>
             </div>
