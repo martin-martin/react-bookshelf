@@ -18,7 +18,7 @@ class Bookshelf extends Component {
               <ol className="books-grid">
                 { this.props.shelves.currentlyReading.map((bookId) => (
                     <li key={bookId}>
-                      <Book book={this.props.books.filter(book => book.id === bookId)[0]} />
+                      <Book book={this.props.mappedBooks[bookId]} />
                     </li>
                 ))}
               </ol>
@@ -30,7 +30,7 @@ class Bookshelf extends Component {
               <ol className="books-grid">
                 { this.props.shelves.wantToRead.map((bookId) => (
                     <li key={bookId}>
-                      <Book book={this.props.books.filter(book => book.id === bookId)[0]} />
+                      <Book book={this.props.mappedBooks[bookId]} />
                     </li>
                 ))}
               </ol>
@@ -42,7 +42,7 @@ class Bookshelf extends Component {
               <ol className="books-grid">
                 { this.props.shelves.read.map((bookId) => (
                     <li key={bookId}>
-                      <Book book={this.props.books.filter(book => book.id === bookId)[0]} />
+                      <Book book={this.props.mappedBooks[bookId]} />
                     </li>
                 ))}
               </ol>
