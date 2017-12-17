@@ -11,6 +11,7 @@ import './App.css'
 class BooksApp extends React.Component {
   state = {
     books: [],
+    mappedBooks: {},
     shelves: {
       currentlyReading: [],
       wantToRead: [],
@@ -24,6 +25,7 @@ class BooksApp extends React.Component {
       this.setState({
         loading: false,
         books: books,
+        mappedBooks: this.mapBooksToId(books),
         shelves: {
           currentlyReading: this.assignBooksToShelf(books, 'currentlyReading'),
           wantToRead: this.assignBooksToShelf(books, 'wantToRead'),
@@ -34,7 +36,18 @@ class BooksApp extends React.Component {
       // console.log(this.state.shelves.read)
       // console.log(this.state.shelves.wantToRead)
       // console.log(this.state.books)
+      // console.log(this.state.mappedBooks)
     })
+  }
+
+  mapBooksToId(books) {
+  // creates a mapping of each book ID to the data of the associated book
+  // allows for easier handling of book objects
+    var mappedBooks = {}
+    for (var i=0; i < books.length; i++) {
+      mappedBooks[books[i].id] = books[i]
+    }
+    return mappedBooks
   }
 
   assignBooksToShelf(books, shelf) {
