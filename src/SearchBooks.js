@@ -2,36 +2,28 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Book from './Book'
 import throttle from 'lodash.throttle'
+import { search } from './BooksAPI'
 
 
 class SearchBooks extends Component {
 
   state = {
     query: "",
+    searchBooks: [],
     books : this.props.books
   }
 
-  componentDidMount() {
-    // sets the focus on the search field
-    this.input.focus()
-
-    // limits the API calls to 1 every 1000ms, removes leading whitespace chars
-    this.runSearch = throttle(this.runSearch, 1000, {
-      leading: false,
-      trailing: true
-    })
-
-    // sets the query param and runs the Search function if there is a query
-    const { query } = this.state
-    if (query) {
-      this.runSearch(query)
+  runSearch = event => {
+    const newText = event.target.value.trim();
+    this.setState({ query: newText });
+    if (newText.length > 0) {
+      search(newText).then(searchBooks => {
+        if (searchBooks.length > 0) {
+          this.setState({ searchBooks });
+        }
+      });
     }
-  }
-
-  runSearch = (query) => {
-    console.log("yippie yippieh yeah!")
-    console.log(query)
-  }
+  };
 
   render() {
     return(
@@ -48,18 +40,25 @@ class SearchBooks extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" placeholder="Search by title or author"/>
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              value={this.state.query}
+              onChange={this.runSearch}
+            />
 
           </div>
         </div>
         <div className="search-books-results">
+
           <ol className="books-grid">
-            {this.state.books.map((book, i) => (
+            {this.state.searchBooks.map((book, i) => (
               <li key={i}>
-                <Book book={book}/>
+                {JSON.stringify(book)}
               </li>
             ))}
           </ol>
+
         </div>
       </div>
     )
